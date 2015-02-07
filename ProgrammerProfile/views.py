@@ -115,7 +115,10 @@ def staruser(request, category=None):
 
 def user(request, username=None):
     if username is None:
-        username = request.GET['username']
+        try:
+            username = request.GET['username']
+        except:
+            return HttpResponseRedirect('/')
     context = {'viewName': 'user'}
     if request.user.username == username:
         context['viewName'] = 'myprofile'
