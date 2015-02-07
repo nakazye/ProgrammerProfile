@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <script src="{% static 'jquery/jquery-2.1.3.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+        <!-- Bootflat -->
+        <link rel="stylesheet" href="{% static 'bootflat/css/bootflat.css' %}">
+        <script src="{% static 'bootflat/js/icheck.min.js' %}"></script>
+        <script src="{% static 'bootflat/js/jquery.fs.selecter.min.js' %}"></script>
+        <script src="{% static 'bootflat/js/jquery.fs.stepper.min.js' %}"></script>
+
+        <!-- bootstrap-select -->
+        <link rel="stylesheet" href="{% static 'bootstrap-select/css/bootstrap-select.min.css' %}">
+        <script src="{% static 'bootstrap-select/js/bootstrap-select.min.js'%}"></script>
+        
+
+        <title>{% block title %}Programmer Profile{% endblock %}</title>
+
+    </head>
+    <body>
+
+        <div class="docs-header">
+            <nav class="navbar navbar-default navbar-custom" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html"><!-- <img src="img/logo.png" height="40"> --></a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li{% if viewName == 'index' %} class="active"{% endif %}><a class="nav-link" href="/">ホーム</a></li>
+                            <li{% if viewName == 'staruser' %} class="active"{% endif %}><a class="nav-link" href="/staruser/">フォローすべき人たち</a></li>
+                            {% if user.is_authenticated %}
+                            <li{% if viewName == 'myprofile' %} class="active"{% endif %}><a class="nav-link" href="/user/{{ user.get_username }}">マイプロフィール</a></li>
+                            {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if user.is_authenticated %}
+                            <li><a class="nav-link" href="/logout/">ログアウト</a></li>
+                            {% else %}
+                            <li><a class="nav-link" href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">サインイン/ログイン</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+
+        
+        {% block content %}{% endblock %}
+    </body>
+</html>

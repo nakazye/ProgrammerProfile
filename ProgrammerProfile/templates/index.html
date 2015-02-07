@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <div class="jumbotron-contents">
+                    <h1>たくさんのプログラマーをフォローしたいんだ。<br />みんなの知ってる情報を教えて欲しい。</h1>
+                    <small>※深夜のテンションで書いてます</small>
+                    <h2>このサイトは何？</h2>
+                    <p>できることは２つ。世のプログラマーを探すこと。世のプログラマーの情報を提供すること。そこにはあなた自身の情報も含まれる。</p>
+                    <p>ここで言ってる情報とはTwitterアカウントがメインになる。</p>
+                    <h2>なんでこんなの作ったの？</h2>
+                    <p>世にある「今すぐフォローすべき○○界のスーパースター」といった情報は誰でも知ってる人が多いし、そもそもメジャー言語にしかスポットが当たらない。</p>
+                    <p>じゃぁ検索してみようとTwitter検索をかけても、プログラマーだからといって常に言語の話をしてる訳じゃない。探すのも難しい。<br />
+                        もしかすると「プログラミング」で検索するより「おっぱい」で検索した方がプログラマーに当たるかもしれない。</p>
+                    <p>そこで、世のプログラマーの情報を集めたページを作ればいいんじゃないかと思い立ったんだ。</p>
+                    <h2>お願いがある</h2>
+                    <p>繰り返しになるけど、みんなの知ってるプログラマーの情報を教えて欲しい。</p>
+                    <p>以下のフィールドに、みんなの知ってるプログラマーのTwitterアカウント(@含まず)を入力して、そこに知ってる情報を登録してほしい。どんなスキルを持ってるか&nbsp;とか。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/user/" method="GET">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <input class="form-control" placeholder="Twitterユーザー名(@含めず)" name="username">
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="btn btn-primary" onclick="submit();"">検索</button>
+                    </div>
+                </div>
+            </form>
+            <hr />
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">現在はα版の扱いです</div>
+                <div class="panel-body">
+                    <p>以下の内容を実装したら、β版を名乗りつつ、プロモーション活動していこうかなぁと考えてます。<br />今日明日で終わらせたい。</p>
+                    <p>デザイン？何それ？そんな才能を持つ人しかできないこと言われても・・・</p>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">ロゴ作る</li>
+                    <li class="list-group-item">favicon作る</li>
+                    <li class="list-group-item">推薦消せるように</li>
+                    <li class="list-group-item">ページ処理</li>
+                    <li class="list-group-item">言語以外の推薦(エディタとか、フレームワークとか)</li>
+                    <li class="list-group-item">更新順ページ作成</li>
+                    <li class="list-group-item">トップページちゃんとする</li>
+                    <li class="list-group-item">メタ情報整備</li>
+                    <li class="list-group-item">更新情報をTwitterでお知らせ</li>
+                    <li class="list-group-item">sitemap情報入れる</li>
+                    <li class="list-group-item">Google Analytics入れる</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

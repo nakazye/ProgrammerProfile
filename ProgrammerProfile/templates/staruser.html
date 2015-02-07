@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="page-header text-center">
+    <h3 style="margin: 15px">{% if selected %}{{ selected }}{% else %}各{% endif %}界のフォローすべきTwitterアカウント</h3>
+    <br />
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            {% if selected %}
+            {{ selected }}
+            {% else %}
+            カテゴリーを選択
+            {% endif %}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            {% for skill in skilllist %}
+            <li{% if skill == selected %} class="active"{% endif %}><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <br /><br />    
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <hr />
+            {% for staruser in users %}
+            <div class="media">
+                <div class="media-left">
+                    <a href="/user/{{ staruser.username }}">
+                        <img src="{{ staruser.userImage }}" alt="@{{ staruser.username }}" width="65" height="65">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <small>{{ staruser.num_recommend }}人の推薦</small>
+                    <a href="/user/{{ staruser.username }}">
+                        <h4 class="media-heading">@{{ staruser.username }}</h4>
+                    </a>
+                    <p>{{ staruser.userScreenName }}</p>
+                    <small>{{ staruser.userDescription }}</small>
+                </div>
+            </div>
+            <hr />
+            {% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock %}
