@@ -4,6 +4,35 @@
 
 {% block content %}
 
+{% if status == 'UNKNOWN_USER' %}
+<div class="page-header text-center">
+    <h2 style="margin: 15px">Twitterにいないユーザーみたいです。</h2>
+    <h4>別のユーザー名で試してみてね</h4>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/user/" method="GET">
+                <div class="row">
+                    <div class="col-xs-11">
+                        <input class="form-control" placeholder="Twitterユーザー名(@含めず)" name="username">
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="btn btn-primary" onclick="submit();"">検索</button>
+                    </div>
+                </div>
+            </form>
+            <hr />
+        </div>
+    </div>
+</div>
+{% elif status == 'UNKNOWN_ERROR' %}
+<div class="page-header text-center">
+    <h2 style="margin: 15px">Twitterがエラーコード返してきました・・・</h2>
+    <h4>お手数ですがしばらく経ってからお試しください。ずっと続くようでしたら、これまたお手数ですが@nakazyeまでご連絡頂けると幸いです</h4>
+</div>
+{% else %}
+
 <div class="page-header text-center">
     <img src="{{ userImage }}" />
     <h2 style="margin: 15px">@{{ userName }}</h2>
@@ -957,5 +986,5 @@
   </div>
 </div>
 
-
+{% endif %}
 {% endblock %}
