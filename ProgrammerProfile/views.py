@@ -143,7 +143,7 @@ def user(request, username=None):
                 userdata.userDescription = twResponseData['description']
                 userdata.save()
             elif twResponse.status_code == 404:
-                raise Http404
+                raise Http404('Twitterにいないユーザーみたいだよ。')
             else:
                 context.update({'status': 'UNKNOWN_ERROR'})
                 return render_to_response('user.html',
@@ -161,7 +161,7 @@ def user(request, username=None):
                                         lastUpdate=timezone.now())
             userdata.save()
         elif twResponse.status_code == 404:
-            raise Http404
+            raise Http404('Twitterにいないユーザーみたいだよ。')
         else:
             context.update({'status': 'UNKNOWN_ERROR'})
             raise HttpResponseServerError('ツイッターの調子がおかしいみたい。あとで試してみてください。')
