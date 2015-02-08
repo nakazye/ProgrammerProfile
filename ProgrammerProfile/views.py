@@ -174,7 +174,8 @@ def user(request, username=None):
             return render_to_response('user.html',
                                       context,
                                       context_instance=RequestContext(request))
-    context.update({'userName': userdata.username,
+    context.update({'userdata': userdata,
+                    'userName': userdata.username,
                     'userImage': userdata.userImage.replace('_normal', '_bigger'),
                     'userScreenName': userdata.userScreenName,
                     'userDescription': userdata.userDescription})
@@ -211,7 +212,7 @@ def updateInfo(request):
     if request.method == 'GET':
         return HttpResponseRedirect('/')
 
-    username = request.REQUEST['username']
+    username = request.REQUEST['username'].strip()
     category = request.REQUEST['category']
     subcategory = request.REQUEST['subcategory']
     account = request.REQUEST['account'].strip()
@@ -255,7 +256,7 @@ def updateInfo(request):
         return user(request, username)
 
     try:
-        # update social data
+        # update data
         if category in ('skill', 'comment'):
             me = BasicTwitterInfo.objects.get(username=request.user.username)
             userinfo = UserInfo.objects.get(target=userdata,
@@ -269,11 +270,16 @@ def updateInfo(request):
         
         if userinfo.update.username == username and username != request.user.username and userinfo.data != '': # validation
             return user(request, username)
-        userinfo.data = account
-        userinfo.update = BasicTwitterInfo.objects.get(username=request.user.username)
-        userinfo.save()
+
+        if category == 'skill' and account == 'delete':
+            userinfo.delete()
+        else:
+            userinfo.data = account
+            userinfo.update = BasicTwitterInfo.objects.get(username=request.user.username)
+            userinfo.save()
+
     except ObjectDoesNotExist:
-        # create social data
+        # create data
         try:
             me = BasicTwitterInfo.objects.get(username=request.user.username)
         except ObjectDoesNotExist:
