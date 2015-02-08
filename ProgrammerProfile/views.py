@@ -122,6 +122,10 @@ def user(request, username=None):
     context = {'viewName': 'user'}
     if request.user.username == username:
         context['viewName'] = 'myprofile'
+
+    if username.startswith('@'):
+        return HttpResponseRedirect('/user/' + username.replace('@', ''))
+        
     context.update(csrf(request))
 
     context.update({'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY})
