@@ -126,6 +126,8 @@ def user(request, username=None):
     if request.user.username == username:
         context['viewName'] = 'myprofile'
 
+    username = username.strip()
+
     if username.startswith('@'):
         return HttpResponseRedirect('/user/' + username.replace('@', ''))
         
@@ -187,6 +189,7 @@ def user(request, username=None):
     userhps = []
     userskills = {}
     usercomments = []
+    isUserConfirm = False
     for userinfo in userinfos:
         if userinfo.category == 'social':
             context.update({(userinfo.category + userinfo.subcategory): userinfo})
@@ -200,9 +203,16 @@ def user(request, username=None):
         elif  userinfo.category == 'comment' and userinfo.data != '':
             usercomments.append(userinfo)
 
+        if request.user.is_authenticated():
+            if userinfo.update.username == username:
+                isUserConfirm = True
+
+    print(isUserConfirm)
+
     context.update({'userhps': userhps})
     context.update({'userskills': userskills})
     context.update({'usercomments': usercomments})
+    context.update({'isUserConfirm': isUserConfirm})
     
     return render_to_response('user.html',
                               context,

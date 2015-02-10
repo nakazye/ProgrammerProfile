@@ -74,23 +74,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialgithub.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#githubModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialgithub.update.username and user.username == userName or socialgithub.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#githubModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#githubModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#githubModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -111,23 +122,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialstackexchange.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#stackexchangeModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialstackexchange.update.username and user.username == userName or socialstackexchange.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#stackexchangeModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+                            
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#stackexchangeModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#stackexchangeModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -148,23 +170,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialslashdoten.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#slashdotenModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialslashdoten.update.username and user.username == userName or socialslashdoten.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#slashdotenModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#slashdotenModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#slashdotenModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -185,23 +218,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialslashdotja.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#slashdotjaModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialslashdotja.update.username and user.username == userName or socialslashdotja.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#slashdotjaModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#slashdotjaModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#slashdotjaModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -222,23 +266,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialqiita.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#qiitaModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialqiita.update.username and user.username == userName or socialqiita.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#qiitaModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#qiitaModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#qiitaModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -259,23 +314,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialslideshare.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#slideshareModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialslideshare.update.username and user.username == userName or socialslideshare.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#slideshareModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#slideshareModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#slideshareModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -296,23 +362,34 @@
                             </a>
                             情報&nbsp;)&nbsp;
                             {% if user.is_authenticated %}
-                            {% if user.username != socialhatena.update.username and user.username == userName %}
+                            {% if user.username == userName %}
                             <a href="#" data-toggle="modal" data-target="#hatenaModal"><span class="label label-primary">
                                 訂正/承認
                             </span></a>
-                            {% elif user.username == socialhatena.update.username and user.username == userName or socialhatena.update.username != userName %}
+                            {% elif not isUserConfirm %}
                             <a href="#" data-toggle="modal" data-target="#hatenaModal"><span class="label label-primary">
                                 訂正
                             </span></a>
                             {% endif %}
                             {% endif %}
+
+                            <!-- nodata -->
                             {% else %}
-                            <!-- no data(logined) -->
-                            {% if user.is_authenticated %}
+                            
+                            {% if isUserConfirm %}
+                            {%   if user.username == userName %}
+                            <a href="#" data-toggle="modal" data-target="#hatenaModal">(データ登録)</a>
+                            {%   else %}
+                            <!-- blank -->
+                            {%   endif %}
+                            {% else %}
+                            {%   if user.is_authenticated %}
                             <a href="#" data-toggle="modal" data-target="#hatenaModal">(ご存知だったら教えてください！)</a>
-                            {% else %}
+                            {%   else %}
                             (ご存知だったら教えてください！)
+                            {%   endif %}
                             {% endif %}
+                            
                             {% endif %}
                         </p>
                     </td>
@@ -342,7 +419,9 @@
                             {% if user.is_authenticated and user.username == userName  %}
                             <a href="#" data-toggle="modal" data-target="#quoraModal">(実名制の為本人のみ更新可能)</a>
                             {% else %}
+                            {% if not isUserConfirm %}
                             (実名制の為本人のみ更新可能)
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                         </p>
@@ -373,7 +452,9 @@
                             {% if user.is_authenticated and user.username == userName  %}
                             <a href="#" data-toggle="modal" data-target="#linkedinModal">(実名制の為本人のみ更新可能)</a>
                             {% else %}
+                            {% if not isUserConfirm %}
                             (実名制の為本人のみ更新可能)
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                         </p>
@@ -404,7 +485,9 @@
                             {% if user.is_authenticated and user.username == userName  %}
                             <a href="#" data-toggle="modal" data-target="#facebookModal">(実名制の為本人のみ更新可能)</a>
                             {% else %}
+                            {% if not isUserConfirm %}
                             (実名制の為本人のみ更新可能)
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                         </p>
@@ -435,7 +518,9 @@
                             {% if user.is_authenticated and user.username == userName  %}
                             <a href="#" data-toggle="modal" data-target="#googleplusModal">(実名制の為本人のみ更新可能)</a>
                             {% else %}
+                            {% if not isUserConfirm %}
                             (実名制の為本人のみ更新可能)
+                            {% endif %}
                             {% endif %}
                             {% endif %}
                         </p>
@@ -444,7 +529,12 @@
             </table>
             {% if not user.is_authenticated %}
             <div class="text-center">
-                <p>※ログインする事で編集が可能になります</p>
+                <p><small>※ログインする事で編集が可能になります</small></p>
+            </div>
+            {% else %}
+            <div class="text-center">
+                <br />
+                <p><small>※訂正して空入力の状態で保存することで、削除できます<br />※本人の入力が一つでもある場合は他者の編集不可となります</small></p>
             </div>
             {% endif %}
         </div>
@@ -486,7 +576,7 @@
                 {% endfor %}
                 <br />
                 <div class="text-center">
-                    <p>※編集は本人のみ可能です</p>
+                    <p><small>※編集は本人のみ可能です</small></p>
                 </div>
             </div>
         </div>
