@@ -1,7 +1,7 @@
 {% load static %}
 <!doctype html>
 <html lang="ja">
-    <head>
+    <head prefix="og: http://ogp.me/ns#  article: http://ogp.me/ns/article#">
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width">
 
@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="{% static 'bootstrap-select/css/bootstrap-select.min.css' %}">
         <script src="{% static 'bootstrap-select/js/bootstrap-select.min.js'%}"></script>
         
-
         <title>{% block title %}Programmer Profile{% endblock %}</title>
+        {% block moreheader %}{% endblock %}
 
     </head>
     <body>
