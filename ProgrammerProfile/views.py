@@ -203,9 +203,8 @@ def user(request, username=None):
         elif  userinfo.category == 'comment' and userinfo.data != '':
             usercomments.append(userinfo)
 
-        if request.user.is_authenticated():
-            if userinfo.update.username == username:
-                isUserConfirm = True
+        if userinfo.update.username == username:
+            isUserConfirm = True
 
     context.update({'userhps': userhps})
     context.update({'userskills': userskills})
