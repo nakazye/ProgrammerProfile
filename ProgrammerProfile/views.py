@@ -207,8 +207,6 @@ def user(request, username=None):
             if userinfo.update.username == username:
                 isUserConfirm = True
 
-    print(isUserConfirm)
-
     context.update({'userhps': userhps})
     context.update({'userskills': userskills})
     context.update({'usercomments': usercomments})
