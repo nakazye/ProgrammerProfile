@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}Programmer Profile - {% if selected %}{{ selected }}{% else %}各{% endif %}界のフォローすべきTwitterアカウント{% endblock %}
+
+{% block moreheader %}
+<meta property="og:url" content="http://www.programmerprofile.net/staruser/{{ selected | urlencode }}{% if selected %}/{% endif %}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Programmer Profile - {% if selected %}{{ selected }}{% else %}各{% endif %}界のフォローすべきTwitterアカウント" />
+<meta property="og:site_name" content="Programmer Profile" >
+<meta property="og:description" content="{% if selected %}{{ selected }}{% else %}各{% endif %}界のフォローすべきTwitterアカウント" />
+{% endblock %}
 
 {% block content %}
 
@@ -52,5 +61,62 @@
         <div class="col-md-3"></div>
     </div>
 </div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- social -->
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+             }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div style="display: inline-block; vertical-align: top;">
+                        <a href="http://b.hatena.ne.jp/entry/http://www.programmerprofile.net/staruser/{{ selected | urlencode }}{% if selected %}/{% endif %}"
+                           class="hatena-bookmark-button"
+                           data-hatena-bookmark-layout="vertical-balloon"
+                           data-hatena-bookmark-lang="ja"
+                           title="このエントリーをはてなブックマークに追加">
+                            <img src="http://b.st-hatena.com/images/entry-button/button-only@2x.png"
+                                 alt="このエントリーをはてなブックマークに追加"
+                                 width="20"
+                                 height="20"
+                                 style="border: none;" />
+                        </a>
+                        <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+                    </div>
+                    <div style="display: inline-block; vertical-align: top;">
+                        <a href="https://twitter.com/share"
+                           class="twitter-share-button twitter-count-vertical"
+                           data-hashtags="PgmrProf"
+                           data-lang="ja" data-count="vertical">
+                            ツイート
+                        </a>
+                        <script>
+                         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
+                             if(!d.getElementById(id)){js=d.createElement(s);
+                                 js.id=id;js.src="//platform.twitter.com/widgets.js";
+                                 fjs.parentNode.insertBefore(js,fjs);
+                             }
+                         }(document,"script","twitter-wjs");
+                        </script>
+                    </div>
+                    <div style="display: inline-block; vertical-align: top;">
+                        <div class="fb-like" expr:data-href="data:post.url" data-layout="box_count" data-action="like" data-show-faces="false" data-share="false"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
