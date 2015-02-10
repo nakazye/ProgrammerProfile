@@ -504,15 +504,15 @@
                 <h4>
                     このユーザーのスキル
                     {% if user.is_authenticated %}
-                    &nbsp;<a href="#" data-toggle="modal" data-target="#skillModal"><span class="label label-primary">推薦する</span></a>
+                    &nbsp;<a href="#" data-toggle="modal" data-target="#skillModal"><span class="label label-primary">新しいスキルを推薦する</span></a>
                     {% endif %}
                 </h4>
-                <!-- TODO 削除機能 -->
                 <br />
                 {% for skill, recommenders in userskills.items %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></h3>
+
                         {# list comprehensions and generator expressions are not supported.... #}
                         {% for recommender in recommenders %}
                         {% if user.username == recommender.update.username %}
@@ -525,8 +525,28 @@
                             <br />
                             <button type="submit" class="btn btn-primary btn-xs">推薦を取り消す</button>
                         </form>
-                            {% endif %}
-                            {% endfor %}
+                        <!-- 苦肉の策
+                        {% endif %}
+                        {% endfor %}                        
+
+                        {% if user.is_authenticated %}
+                        <form action="/updateInfo" method="post">
+                            {% csrf_token %}
+                            <input type='hidden' name='username' value='{{ userName }}' />
+                            <input type='hidden' name='category' value='skill' />
+                            <input type='hidden' name='subcategory' value='{{ skill }}' />
+                            <input type='hidden' name='account' value='skilled' />
+                            <br />
+                            <button type="submit" class="btn btn-primary btn-xs">推薦する</button>
+                        </form>
+                        {% endif %}
+
+                        {% for recommender in recommenders %}
+                        {% if user.username == recommender.update.username %}
+                            苦肉の策 -->
+                        {% endif %}
+                        {% endfor %}  
+                        
                     </div>
                     <div class="panel-body">
                         {% for recommender in recommenders %}
