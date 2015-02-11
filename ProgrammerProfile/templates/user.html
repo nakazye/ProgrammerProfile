@@ -1087,20 +1087,27 @@
                   <div class="row">
                       <div class="col-xs-12">
                           <p><label>このユーザーが得意な事を教えてください</label></p>
-                          <select class="selectpicker" name="subcategory">
-                              <optgroup label="Language">
+                          <select class="selectpicker" name="subcategory" data-live-search="true">
+                              <optgroup label="言語">
                                   {% for option in skillLanguageCategory %}
                                   <option value="{{ option }}">{{option}}</option>
                                   {% endfor %}
                               </optgroup>
-                              <!-- TODO
-                              <optgroup label="Major Server/Flamework/Library">
-                                  <option>xxx</option>
+                              <optgroup label="特定プラットフォーム向け開発">
+                                  {% for option in skillPlatformCategory %}
+                                  <option value="{{ option }}">{{option}}</option>
+                                  {% endfor %}
                               </optgroup>
-                              <optgroup label="Editor/IDE">
-                                  <option>xxx</option>
+                              <optgroup label="エディタ/IDE">
+                                  {% for option in skillEditorCategory %}
+                                  <option value="{{ option }}">{{option}}</option>
+                                  {% endfor %}
                               </optgroup>
-                              -->
+                              <optgroup label="その他">
+                                  {% for option in skillOthersCategory %}
+                                  <option value="{{ option }}">{{option}}</option>
+                                  {% endfor %}
+                              </optgroup>
                           </select>
                       </div>
                   </div>

@@ -26,9 +26,38 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-            {% for skill in skilllist %}
-            <li{% if skill == selected %} class="active"{% endif %}><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></li>
-            {% endfor %}
+            <li class="dropdown-submenu">
+                <a href="#">言語</a>
+                <ul class="dropdown-menu">
+                    {% for skill in skillLanguageCategory %}
+                    <li{% if skill == selected %} class="active"{% endif %}><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="#">特定プラットフォーム向け開発</a>
+                <ul class="dropdown-menu">
+                    {% for skill in skillPlatformCategory %}
+                    <li{% if skill == selected %} class="active"{% endif %}><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="#">エディタ/IDE</a>
+                <ul class="dropdown-menu">
+                    {% for skill in skillEditorCategory %}
+                    <li{% if skill == selected %} class="active"{% endif %}><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a href="#">その他</a>
+                <ul class="dropdown-menu">
+                    {% for skill in skillOthersCategory %}
+                    <li{% if skill == selected %} class="active"{% endif %}><a href="/staruser/{{ skill | urlencode }}/">{{ skill }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
         </ul>
     </div>
     <br /><br />    

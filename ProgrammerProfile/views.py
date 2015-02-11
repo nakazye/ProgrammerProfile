@@ -83,7 +83,34 @@ SKILL_LANGUAGE_CATEGORY = ('ABAP',
                            'zsh',
                            'なでしこ')
 
+SKILL_PLATFORM_CATEGORY = ('Windows',
+                           'Mac',
+                           'Linux',
+                           'BSD',
+                           'Android',
+                           'iOS',
+                           'Windows Phone',
+                           'blackberry',
+                           'webアプリケーション',
+                           '組み込み')
 
+SKILL_EDITOR_CATEGORY = ('vi',
+                         'vim',
+                         'Emacs',
+                         'xyzzy',
+                         'Sublime Text',
+                         'atom',
+                         'coda',
+                         'Visual Studio',
+                         'SharpDevelop',
+                         'Xcode',
+                         'Eclipse',
+                         'IntelliJ IDEA'
+)
+
+SKILL_OTHERS_CATEGORY = ('競技プログラミング',
+                         'コードゴルフ',
+                         'ワンライナー(include シェル芸)')
 
 def index(request):
     context = {'viewName': 'index'}
@@ -102,9 +129,12 @@ def logout(request):
 
 def staruser(request, category=None):
     context = {'viewName': 'staruser'}
-
+    
     context.update({'selected': category,
-                    'skilllist': SKILL_LANGUAGE_CATEGORY})
+                    'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY,
+                    'skillPlatformCategory': SKILL_PLATFORM_CATEGORY,
+                    'skillEditorCategory': SKILL_EDITOR_CATEGORY,
+                    'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     userinfos = BasicTwitterInfo.objects.filter(target__category='skill',
                                                 target__subcategory=category).annotate(num_recommend=Count('target')).order_by('-num_recommend')
@@ -132,7 +162,10 @@ def user(request, username=None):
         
     context.update(csrf(request))
 
-    context.update({'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY})
+    context.update({'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY,
+                    'skillPlatformCategory': SKILL_PLATFORM_CATEGORY,
+                    'skillEditorCategory': SKILL_EDITOR_CATEGORY,
+                    'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     # --- basic info ---
     try:
@@ -256,7 +289,10 @@ def updateInfo(request):
             elif datasize == '999':
                 return user(request, username) # maybe nuisance
             subcategory = str(int(datasize) + 1).zfill(3)
-    elif category == 'skill' and subcategory in SKILL_LANGUAGE_CATEGORY:
+    elif category == 'skill' and (subcategory in SKILL_LANGUAGE_CATEGORY or
+                                  subcategory in SKILL_PLATFORM_CATEGORY or
+                                  subcategory in SKILL_EDITOR_CATEGORY or
+                                  subcategory in SKILL_OTHERS_CATEGORY):
         pass
     elif category == 'comment':
         pass
