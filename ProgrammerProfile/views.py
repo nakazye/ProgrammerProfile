@@ -154,10 +154,9 @@ def stats(request, category=None):
                     'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     skillCombatPowers = UserInfo.objects.filter(category='skill').values('subcategory').annotate(Count('subcategory')).order_by('-subcategory__count')
-    skillCombatPowersAll = UserInfo.objects.filter(category='skill').aggregate(Count('subcategory'))['subcategory__count']
 
     for skillCombatPower in skillCombatPowers:
-        skillCombatPower['subcategory__ratio'] = int(skillCombatPower['subcategory__count'] / skillCombatPowersAll * 100)
+        skillCombatPower['subcategory__ratio'] = int(skillCombatPower['subcategory__count'] / skillCombatPowers[0]['subcategory__count'] * 100)
     
     context.update({'skillCombatPowers': skillCombatPowers})
 
