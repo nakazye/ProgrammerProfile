@@ -145,6 +145,27 @@ def staruser(request, category=None):
                               context_instance=RequestContext(request))
 
 
+def stats(request, category=None):
+    context = {'viewName': 'stats'}
+    
+    context.update({'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY,
+                    'skillPlatformCategory': SKILL_PLATFORM_CATEGORY,
+                    'skillEditorCategory': SKILL_EDITOR_CATEGORY,
+                    'skillOthersCategory': SKILL_OTHERS_CATEGORY})
+
+    skillCombatPowers = UserInfo.objects.filter(category='skill').values('subcategory').annotate(Count('subcategory')).order_by('-subcategory__count')
+    skillCombatPowersAll = UserInfo.objects.filter(category='skill').aggregate(Count('subcategory'))['subcategory__count']
+
+    for skillCombatPower in skillCombatPowers:
+        skillCombatPower['subcategory__ratio'] = int(skillCombatPower['subcategory__count'] / skillCombatPowersAll * 100)
+    
+    context.update({'skillCombatPowers': skillCombatPowers})
+
+    return render_to_response('stats.html',
+                              context,
+                              context_instance=RequestContext(request))
+
+
 def user(request, username=None):
     if username is None:
         try:

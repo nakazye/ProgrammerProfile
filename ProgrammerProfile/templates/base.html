@@ -53,6 +53,7 @@
                         <ul class="nav navbar-nav navbar-left">
                             <li{% if viewName == 'index' %} class="active"{% endif %}><a class="nav-link" href="/">ホーム</a></li>
                             <li{% if viewName == 'staruser' %} class="active"{% endif %}><a class="nav-link" href="/staruser/">フォローすべき人たち</a></li>
+                            <li{% if viewName == 'stats' %} class="active"{% endif %}><a class="nav-link" href="/stats/">各界の統計</a></li>
                             {% if user.is_authenticated %}
                             <li{% if viewName == 'myprofile' %} class="active"{% endif %}><a class="nav-link" href="/user/{{ user.get_username }}">マイプロフィール</a></li>
                             {% endif %}
