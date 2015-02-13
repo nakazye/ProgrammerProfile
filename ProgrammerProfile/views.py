@@ -109,6 +109,13 @@ SKILL_EDITOR_CATEGORY = ('vi',
                          'IntelliJ IDEA'
 )
 
+SKILL_CONFIGURATION_CATEGORY = ('Ansible',
+                                'Chef',
+                                'Fabric',
+                                'Puppet',
+                                'Salt',
+                                'ServerSpec')
+
 SKILL_OTHERS_CATEGORY = ('競技プログラミング',
                          'コードゴルフ',
                          'ワンライナー(include シェル芸)')
@@ -135,6 +142,7 @@ def staruser(request, category=None):
                     'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY,
                     'skillPlatformCategory': SKILL_PLATFORM_CATEGORY,
                     'skillEditorCategory': SKILL_EDITOR_CATEGORY,
+                    'skillConfigurationCategory': SKILL_CONFIGURATION_CATEGORY,
                     'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     userinfos = BasicTwitterInfo.objects.filter(target__category='skill',
@@ -152,6 +160,7 @@ def stats(request, category=None):
     context.update({'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY,
                     'skillPlatformCategory': SKILL_PLATFORM_CATEGORY,
                     'skillEditorCategory': SKILL_EDITOR_CATEGORY,
+                    'skillConfigurationCategory': SKILL_CONFIGURATION_CATEGORY,
                     'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     skillCombatPowers = UserInfo.objects.filter(category='skill').values('subcategory').annotate(Count('subcategory')).order_by('-subcategory__count')
@@ -186,6 +195,7 @@ def user(request, username=None):
     context.update({'skillLanguageCategory': SKILL_LANGUAGE_CATEGORY,
                     'skillPlatformCategory': SKILL_PLATFORM_CATEGORY,
                     'skillEditorCategory': SKILL_EDITOR_CATEGORY,
+                    'skillConfigurationCategory': SKILL_CONFIGURATION_CATEGORY,
                     'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     # --- basic info ---
@@ -313,6 +323,7 @@ def updateInfo(request):
     elif category == 'skill' and (subcategory in SKILL_LANGUAGE_CATEGORY or
                                   subcategory in SKILL_PLATFORM_CATEGORY or
                                   subcategory in SKILL_EDITOR_CATEGORY or
+                                  subcategory in SKILL_CONFIGURATION_CATEGORY or
                                   subcategory in SKILL_OTHERS_CATEGORY):
         pass
     elif category == 'comment':
