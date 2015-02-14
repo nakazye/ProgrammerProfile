@@ -112,6 +112,7 @@ SKILL_EDITOR_CATEGORY = ('vi',
 SKILL_CONFIGURATION_CATEGORY = ('Ansible',
                                 'Chef',
                                 'Fabric',
+                                'Itamae',
                                 'Puppet',
                                 'Salt',
                                 'ServerSpec')
