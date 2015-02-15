@@ -119,3 +119,6 @@ SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('TWITTER_SECRET_FOR_USER')
 
 import markdown
 README = markdown.Markdown().convert(open(os.path.join(SITE_ROOT, '../', 'README.md')).read())
+print('*****README*****')
+print(README)
+print('*****README*****')
