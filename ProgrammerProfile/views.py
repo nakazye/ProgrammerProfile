@@ -126,9 +126,13 @@ SKILL_OTHERS_CATEGORY = ('競技プログラミング',
 def index(request):
     context = {'viewName': 'index'}
 
+    print('*****README*****')
+    print(ProgrammerProfile.settings.README)
+    print('*****README*****')
+    
     if request.user.is_authenticated():
         context.update({'username': request.user,
-                        'README': ProgrammerProfile.settings.README})
+                        'README': ProgrammerProfile.settings.README })
 
     return render_to_response('index.html',
                               context,
