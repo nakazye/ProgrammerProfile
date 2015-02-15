@@ -124,15 +124,12 @@ SKILL_OTHERS_CATEGORY = ('競技プログラミング',
                          'ワンライナー(include シェル芸)')
 
 def index(request):
-    context = {'viewName': 'index'}
+    context = {'viewName': 'index',
+    'README': ProgrammerProfile.settings.README}
 
-    print('*****README*****')
-    print(ProgrammerProfile.settings.README)
-    print('*****README*****')
     
     if request.user.is_authenticated():
-        context.update({'username': request.user,
-                        'README': ProgrammerProfile.settings.README })
+        context.update({'username': request.user})
 
     return render_to_response('index.html',
                               context,
