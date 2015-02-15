@@ -116,3 +116,6 @@ STATICFIELS_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_TWITTER_KEY = os.environ.get('TWITTER_KEY_FOR_USER')
 SOCIAL_AUTH_TWITTER_SECRET = os.environ.get('TWITTER_SECRET_FOR_USER')
+
+import markdown
+README = markdown.Markdown().convert(open('README.md').read())

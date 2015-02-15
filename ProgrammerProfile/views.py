@@ -13,9 +13,11 @@ from requests_oauthlib import OAuth1Session
 from ProgrammerProfile.models import BasicTwitterInfo
 from ProgrammerProfile.models import UserInfo
 
+import ProgrammerProfile.settings
 import os
 import json
 import datetime
+
 
 TW_SESSION = OAuth1Session(
     os.environ.get('TWITTER_KEY_FOR_POST'),
@@ -125,7 +127,8 @@ def index(request):
     context = {'viewName': 'index'}
 
     if request.user.is_authenticated():
-        context.update({'username': request.user})
+        context.update({'username': request.user,
+                        'README': ProgrammerProfile.settings.README})
 
     return render_to_response('index.html',
                               context,

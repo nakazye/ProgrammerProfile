@@ -7,6 +7,7 @@ django-toolbelt==0.0.1
 epc==0.0.5
 gunicorn==19.2.0
 jedi==0.8.1
+Markdown==2.5.2
 newrelic==2.42.0.35
 oauthlib==0.7.2
 psycopg2==2.5.4

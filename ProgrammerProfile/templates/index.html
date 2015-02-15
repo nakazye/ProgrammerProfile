@@ -17,73 +17,69 @@
         <div class="col-md-12">
             <div class="jumbotron">
                 <div class="jumbotron-contents">
-                    <h1>たくさんのプログラマーをフォローしたいんだ。<br />みんなの知ってる情報を教えて欲しい。</h1>
-                    <small>※深夜のテンションで書いてます</small>
-                    <h2>このサイトは何？</h2>
-                    <p>できることは２つ。世のプログラマーを探すこと。世のプログラマーの情報を提供すること。そこにはあなた自身の情報も含まれる。</p>
-                    <p>ここで言ってる情報とはTwitterアカウントがメインになる。</p>
-                    <h2>なんでこんなの作ったの？</h2>
-                    <p>世にある「今すぐフォローすべき○○界のスーパースター」といった情報は誰でも知ってる人が多いし、そもそもメジャー言語にしかスポットが当たらない。</p>
-                    <p>じゃぁ検索してみようとTwitter検索をかけても、プログラマーだからといって常に言語の話をしてる訳じゃない。探すのも難しい。<br />
-                        もしかすると「プログラミング」で検索するより「おっぱい」で検索した方がプログラマーに当たるかもしれない。</p>
-                    <p>そこで、世のプログラマーの情報を集めたページを作ればいいんじゃないかと思い立ったんだ。</p>
-                    <h2>お願いがある</h2>
-                    <p>繰り返しになるけど、みんなの知ってるプログラマーの情報を教えて欲しい。</p>
-                    <p>以下のフィールドに、みんなの知ってるプログラマーのTwitterアカウント(@含まず)を入力して、そこに知ってる情報を登録してほしい。どんなスキルを持ってるか&nbsp;とか。</p>
-                    <p>自薦も大歓迎。こういったサービスは、データが集まらない限り存続できないので・・・</p>
+                    <p><a href="https://github.com/nakazye/ProgrammerProfile/blob/master/README.md" target="_blank">README.md</a></p>
+                    <hr />
+                    {{ README| safe }}
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <form action="/user/" method="GET">
-                <div class="row">
-                    <div class="col-xs-11">
-                        <input class="form-control" placeholder="Twitterユーザー名(@含めず)" name="username">
-                    </div>
-                    <div class="col-xs-1">
-                        <button type="button" class="btn btn-primary" onclick="submit();">検索</button>
-                    </div>
-                </div>
-            </form>
-            <hr />
-        </div>
-    </div>
-    
+
+    <hr />
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">現在はα版の扱いです</div>
+                <div class="panel-heading">お願い</div>
                 <div class="panel-body">
-                    <p>もう少し諸々を実装した後、β版を名乗りつつプロモーション活動していこうかなぁと考えてます</p>
-                    <p>UI設計がマジ苦手なので頑張ります</p>
+                    <p>サービスを開始したばかりで、情報が豊富とは言い難い現状です。</p>
+                    <p><b>あなたが知っているすごい人の情報、頑張っている友達の情報、そしてあなた自身の情報を教えてください。</b>(ログインすることで推薦が可能となります)</p>
+                    <p>各ユーザーのページには、http://www.programmerprofile.net/user&lt;twitterユーザー名&gt; でもアクセス可能です。</p>
+                    <form action="/user/" method="GET">
+                        <div class="row">
+                            <div class="col-xs-11">
+                                <input class="form-control" placeholder="Twitterユーザー名(@含めず)" name="username">
+                            </div>
+                            <div class="col-xs-1">
+                                <button type="button" class="btn btn-primary" onclick="submit();">検索</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item">ここにTODO列挙してましたが、githubのissueで管理する様にしました。</li>
-                    <li class="list-group-item">○○を追加して欲しいなどご要望ありましたら、こちらに登録頂けると幸いです。</li>
-                    <li class="list-group-item"><a href="https://github.com/nakazye/ProgrammerProfile/issues" target="_blank">ProgrammerProfile:issues</a></li>
-                </ul>
             </div>
         </div>
     </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">念のため</div>
+                <div class="panel-body">
+                    <p>本サービスでは、ログインにTwitterの認証機能(OAuth)を利用しています。</p>
+                    <p>つまり、認証においてはTwitterと同じレベルで安全性が確保されています。</p>
+                    <p>なお、OAuthの情報はログイン管理にのみ利用しており、かつパーミッションもフォローや投稿ができない一番弱いものを設定しています(Twitter連携時に確認できます)。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
 
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">作った人</div>
                 <div class="panel-body">
-                    <p>誰が作ったかもわからないサービスでOAuth通すのはちょっと・・・というありがたいご意見を頂きました。</p>
-                    <p>なお、OAuthの情報はログイン管理にのみ利用しており、かつパーミッションもフォローや投稿ができない一番弱いものを設定しています(Twitter連携時に確認できます)。</p>
+                    <p>この人です→<a href="/user/nakazye/">@nakazye</a></p>
+                    <p>個人で運営しているサービスの為、問い合わせに対する迅速な返信や対応ができない場合もございますのでご了承ください。</p>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item">作った人：<a href="/user/nakazye/">@nakazye</a>←この人です。</li>
-                    <li class="list-group-item">ソース：<a href="https://github.com/nakazye/ProgrammerProfile" target="_blank">nakazye/ProgrammerProfile</a></li>
-                </ul>
             </div>
         </div>
     </div>
+
+    <hr />
 
 
     <!-- social -->
