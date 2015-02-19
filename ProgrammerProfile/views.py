@@ -26,6 +26,7 @@ TW_SESSION = OAuth1Session(
     os.environ.get('TWITTER_ACCESS_SECRET_FOR_POST')
 )
 TW_USER_SHOW_URL = 'https://api.twitter.com/1.1/users/show.json'
+TW_POST_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
 SKILL_LANGUAGE_CATEGORY = ('ABAP',
                            'ActionScript',
@@ -373,4 +374,23 @@ def updateInfo(request):
                             update=me)
         userinfo.save()
 
+    tweetMessage(username, category, subcategory, account)
+        
     return user(request, username)
+
+def tweetMessage(username, category, subcategory, account):
+
+    if account in ('delete', ''):
+        return
+    elif category in ('social', 'userhp'):
+        return
+    elif category == 'skill':
+        message = subcategory + 'の人として推薦があったのでお知らせです！'
+    elif category == 'comment':
+        message = 'あなたの紹介文が登録されたのでお知らせするね！'
+
+    message = '@' + username + ' ' + message
+    message = message + ' http://www.programmerprofile.net/user/' + username
+    message = message + ' ProgrammerProfileは技術者推薦サービスです #PgmrProf'
+
+    twResponse = TW_SESSION.post(TW_POST_URL, params={'status': message})
