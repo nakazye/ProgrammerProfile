@@ -208,10 +208,11 @@ def user(request, username=None):
     try:
         # get DB Userdata
         userdata = BasicTwitterInfo.objects.get(username=username)
-        if userdata.lastUpdate > (timezone.now() + datetime.timedelta(days=1)):
+        if userdata.lastUpdate < (timezone.now() + datetime.timedelta(days=-1)):
             # update DB Userdata from twitter
+            twResponse = TW_SESSION.get(TW_USER_SHOW_URL, params={'screen_name': username})
             if twResponse.status_code == 200:
-                twResponse = TW_SESSION.get(TW_USER_SHOW_URL, params={'screen_name': username})
+                twResponseData = json.loads(twResponse.text)
                 userdata.userImage = twResponseData['profile_image_url']
                 userdata.userScreenName = twResponseData['name']
                 userdata.userDescription = twResponseData['description']
