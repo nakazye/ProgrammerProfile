@@ -118,7 +118,7 @@ SKILL_CONFIGURATION_CATEGORY = ('Ansible',
                                 'Itamae',
                                 'Puppet',
                                 'Salt',
-                                'ServerSpec')
+                                'Serverspec')
 
 SKILL_OTHERS_CATEGORY = ('競技プログラミング',
                          'コードゴルフ',
