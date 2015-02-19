@@ -380,18 +380,18 @@ def updateInfo(request):
     return user(request, username)
 
 def tweetMessage(username, category, subcategory, account):
-
-    if account in ('delete', ''):
-        return
-    elif category in ('social', 'userhp'):
-        return
-    elif category == 'skill':
-        message = subcategory + 'の人として推薦があったのでお知らせです！'
-    elif category == 'comment':
-        message = 'あなたの紹介文が登録されたのでお知らせするね！'
-
-    message = '@' + username + ' ' + message
-    message = message + ' http://www.programmerprofile.net/user/' + username
-    message = message + ' ProgrammerProfileは技術者推薦サービスです #PgmrProf'
-
-    twResponse = TW_SESSION.post(TW_POST_URL, params={'status': message})
+    return
+#    if account in ('delete', ''):
+#        return
+#    elif category in ('social', 'userhp'):
+#        return
+#    elif category == 'skill':
+#        message = subcategory + 'の人として推薦があったのでお知らせです！'
+#    elif category == 'comment':
+#        message = 'あなたの紹介文が登録されたのでお知らせするね！'
+#
+#    message = '@' + username + ' ' + message
+#    message = message + ' http://www.programmerprofile.net/user/' + username
+#    message = message + ' ProgrammerProfileは技術者推薦サービスです #PgmrProf'
+#
+#    twResponse = TW_SESSION.post(TW_POST_URL, params={'status': message})
