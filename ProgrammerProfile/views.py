@@ -205,7 +205,6 @@ def user(request, username=None):
                     'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
     # --- basic info ---
-    
     try:
         # get DB Userdata
         userdata = BasicTwitterInfo.objects.get(username=username)
@@ -219,14 +218,15 @@ def user(request, username=None):
             if twResponse.status_code == 200:
                 twResponseData = json.loads(twResponse.text)
                 if userdata_exists:
+                    userdata.userImage = twResponseData['profile_image_url']
+                    userdata.userScreenName = twResponseData['name']
+                    userdata.userDescription = twResponseData['description']
+                else:
                     userdata = BasicTwitterInfo(username=username,
                                                 userImage=twResponseData['profile_image_url'],
                                                 userScreenName=twResponseData['name'],
                                                 userDescription=twResponseData['description'],
                                                 lastUpdate=timezone.now())
-                    userdata.userImage = twResponseData['profile_image_url']
-                    userdata.userScreenName = twResponseData['name']
-                    userdata.userDescription = twResponseData['description']
                 userdata.save()
             elif twResponse.status_code == 404:
                 context.update({'status': 'UNKNOWN_USER'})
