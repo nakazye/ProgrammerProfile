@@ -208,14 +208,25 @@ def user(request, username=None):
     try:
         # get DB Userdata
         userdata = BasicTwitterInfo.objects.get(username=username)
-        if userdata.lastUpdate < (timezone.now() + datetime.timedelta(days=-1)):
-            # update DB Userdata from twitter
+        userdata_exists = True
+    except ObjectDoesNotExist:
+        userdata_exists = False
+    finally:
+        if not userdata_exists or userdata.lastUpdate < (timezone.now() + datetime.timedelta(days=-1)):
+            # create DB Userdata from twitter
             twResponse = TW_SESSION.get(TW_USER_SHOW_URL, params={'screen_name': username})
             if twResponse.status_code == 200:
                 twResponseData = json.loads(twResponse.text)
-                userdata.userImage = twResponseData['profile_image_url']
-                userdata.userScreenName = twResponseData['name']
-                userdata.userDescription = twResponseData['description']
+                if userdata_exists:
+                    userdata.userImage = twResponseData['profile_image_url']
+                    userdata.userScreenName = twResponseData['name']
+                    userdata.userDescription = twResponseData['description']
+                else:
+                    userdata = BasicTwitterInfo(username=username,
+                                                userImage=twResponseData['profile_image_url'],
+                                                userScreenName=twResponseData['name'],
+                                                userDescription=twResponseData['description'],
+                                                lastUpdate=timezone.now())
                 userdata.save()
             elif twResponse.status_code == 404:
                 context.update({'status': 'UNKNOWN_USER'})
@@ -227,27 +238,6 @@ def user(request, username=None):
                 return render_to_response('user.html',
                                           context,
                                           context_instance=RequestContext(request))
-    except ObjectDoesNotExist:
-        # create DB Userdata from twitter
-        twResponse = TW_SESSION.get(TW_USER_SHOW_URL, params={'screen_name': username})
-        if twResponse.status_code == 200:
-            twResponseData = json.loads(twResponse.text)
-            userdata = BasicTwitterInfo(username=username,
-                                        userImage=twResponseData['profile_image_url'],
-                                        userScreenName=twResponseData['name'],
-                                        userDescription=twResponseData['description'],
-                                        lastUpdate=timezone.now())
-            userdata.save()
-        elif twResponse.status_code == 404:
-            context.update({'status': 'UNKNOWN_USER'})
-            return render_to_response('user.html',
-                                      context,
-                                      context_instance=RequestContext(request))
-        else:
-            context.update({'status': 'UNKNOWN_ERROR'})
-            return render_to_response('user.html',
-                                      context,
-                                      context_instance=RequestContext(request))
     context.update({'userdata': userdata,
                     'userName': userdata.username,
                     'userImage': userdata.userImage.replace('_normal', '_bigger'),
