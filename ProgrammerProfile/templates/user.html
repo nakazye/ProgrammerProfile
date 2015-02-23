@@ -42,6 +42,10 @@
 </div>
 {% else %}
 
+{% if twmessage %}
+<div class="alert alert-success" role="alert">更新に成功しました。&nbsp;<a href="http://twitter.com/share?{{ twmessage }}" target="_blank">Twitterでシェアする</a></div>
+{% endif %}
+
 <div class="page-header text-center">
     <img src="{{ userImage }}" />
     <h3 style="margin: 15px"><a href="https://twitter.com/{{ userName }}" target="_blank">@{{ userName }}</a></h3>

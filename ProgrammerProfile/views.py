@@ -182,7 +182,8 @@ def stats(request, category=None):
                               context_instance=RequestContext(request))
 
 
-def user(request, username=None):
+def user(request, username=None, twmessage=None):
+    print('twmessage:',twmessage)
     if username is None:
         try:
             username = request.GET['username']
@@ -271,6 +272,7 @@ def user(request, username=None):
     context.update({'userskills': userskills})
     context.update({'usercomments': usercomments})
     context.update({'isUserConfirm': isUserConfirm})
+    context.update({'twmessage': twmessage})
     
     return render_to_response('user.html',
                               context,
@@ -366,23 +368,24 @@ def updateInfo(request):
                             update=me)
         userinfo.save()
 
-    tweetMessage(username, category, subcategory, account)
         
-    return user(request, username)
+    return user(request, username, tweetMessage(username, category, subcategory, account))
 
 def tweetMessage(username, category, subcategory, account):
-    return
-#    if account in ('delete', ''):
-#        return
-#    elif category in ('social', 'userhp'):
-#        return
-#    elif category == 'skill':
-#        message = subcategory + 'の人として推薦があったのでお知らせです！'
-#    elif category == 'comment':
-#        message = 'あなたの紹介文が登録されたのでお知らせするね！'
-#
-#    message = '@' + username + ' ' + message
-#    message = message + ' http://www.programmerprofile.net/user/' + username
-#    message = message + ' ProgrammerProfileは技術者推薦サービスです #PgmrProf'
-#
-#    twResponse = TW_SESSION.post(TW_POST_URL, params={'status': message})
+
+    if account in ('delete', ''):
+        return
+    elif category in ('social', 'userhp'):
+        return
+    elif category == 'skill':
+        message = 'を' + subcategory + 'の人として推薦してみた！'
+    elif category == 'comment':
+        message = 'の紹介文を書いてみた！'
+
+    message = 'text=.@' + username + message
+
+    message = message + ' フォローすべきプログラマ推薦サービスProgrammerProfile'
+    message = message + '&url=http://www.programmerprofile.net/user/' + username
+    message = message + '&hashtags=PgmrProf'
+    print('hoge',message)
+    return message
