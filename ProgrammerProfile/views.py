@@ -378,9 +378,9 @@ def tweetMessage(username, category, subcategory, account):
     elif category in ('social', 'userhp'):
         return
     elif category == 'skill':
-        message = 'を' + subcategory + 'の人として推薦してみた！'
+        message = 'さんを' + subcategory + 'の人として推薦してみた！'
     elif category == 'comment':
-        message = 'の紹介文を書いてみた！'
+        message = 'さんの紹介文を書いてみた！'
 
     message = 'text=.@' + username + message
 
