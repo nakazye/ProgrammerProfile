@@ -1,8 +1,10 @@
-gulp    = require 'gulp'
-gutil   = require 'gulp-util'
-bower   = require 'main-bower-files'
-flatten = require 'gulp-flatten'
-filter  = require 'gulp-filter'
+gulp        = require 'gulp'
+gutil       = require 'gulp-util'
+runSequence = require 'run-sequence'
+bower       = require 'main-bower-files'
+flatten     = require 'gulp-flatten'
+filter      = require 'gulp-filter'
+rimraf      = require('rimraf');
 
 static_root = './ProgrammerProfile/staticfiles'
 
@@ -13,12 +15,13 @@ paths =
       css:     "#{static_root}/lib/css"
       fonts:   "#{static_root}/lib/fonts"
       
+# =============================================
+# bower
+# =============================================
+gulp.task 'bower:clean', (cb) ->
+  rimraf "#{static_root}/lib/", cb
 
-gulp.task 'default', ->
-  console.log 'gulp!'
-
-gulp.task 'bower', ->
-  # js files
+gulp.task 'bower:js', ->
   jsFilter = filter '**/*.js'
   gulp
     .src bower()
@@ -26,7 +29,7 @@ gulp.task 'bower', ->
     .pipe flatten()
     .pipe gulp.dest "#{paths.dest.lib.js}"
 
-  # css files
+gulp.task 'bower:css', ->
   cssFilter = filter '**/*.css'
   gulp
     .src bower()
@@ -34,11 +37,21 @@ gulp.task 'bower', ->
     .pipe flatten()
     .pipe gulp.dest "#{paths.dest.lib.css}"
 
-  # font files
+gulp.task 'bower:font', ->
   fontFilter = filter '**/glyphicons-halflings-regular.*'
   gulp
     .src bower()
     .pipe fontFilter
     .pipe flatten()
     .pipe gulp.dest "#{paths.dest.lib.fonts}"
-  
+
+gulp.task 'bower', ['bower:clean'], (callback) ->
+  runSequence(
+    ['bower:js', 'bower:css', 'bower:font'],
+    callback
+  )
+
+gulp.task 'default', ->
+  runSequence(
+    'bower'
+  )
