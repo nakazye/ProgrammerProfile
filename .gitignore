@@ -1,5 +1,6 @@
 .env
 db.sqlite3
 *.pyc
-/staticfiles/
-/env/
+staticfiles/
+env/
+node_modules/
