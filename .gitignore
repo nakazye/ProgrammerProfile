@@ -5,3 +5,5 @@ db.sqlite3
 /env/
 /node_modules/
 /bower_components/
+/ProgrammerProfile/staticfiles/lib/
+/ProgrammerProfile/staticfiles/js/
