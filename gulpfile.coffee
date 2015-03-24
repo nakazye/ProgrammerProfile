@@ -6,12 +6,14 @@ filter      = require 'gulp-filter'
 runSequence = require 'run-sequence'
 bower       = require 'main-bower-files'
 rimraf      = require 'rimraf'
+sourcemaps  = require 'gulp-sourcemaps'
+coffeelint  = require 'gulp-coffeelint'
 
 static_root = './ProgrammerProfile/staticfiles'
 
 paths =
   src:
-    coffee:    'coffee/src' 
+    coffee:    './coffee/src' 
   dest:
     lib:
       js:      "#{static_root}/lib/js"
@@ -59,17 +61,25 @@ gulp.task 'bower', ['bower:clean'], (callback) ->
 # =============================================
 # my coffee script
 # =============================================
+gulp.task 'coffee:lint', () ->
+  gulp.src "#{paths.src.coffee}/**/*.coffee"
+  .pipe coffeelint('coffeelint.json')
+  .pipe coffeelint.reporter()
+
 gulp.task 'coffee:compile', ->
-  gulp
-    .src "#{paths.src.coffee}/**/*.js"
-    .pipe coffee()
-    .pipe gulp.dest "#{paths.dest.js}"
+  gulp.src "#{paths.src.coffee}/**/*.coffee"
+  .pipe sourcemaps.init()
+  .pipe coffee()
+  .pipe sourcemaps.write()
+  .pipe gulp.dest "#{paths.dest.js}"
 
 gulp.task 'coffee:clean', (cb) ->
   rimraf "#{paths.dest.js}", cb
 
+
 gulp.task 'coffee', ['coffee:clean'], (callback) ->
   runSequence(
+    'coffee:lint',
     'coffee:compile',
     callback
   )
