@@ -1,15 +1,14 @@
-require =
-  baseUrl: '../'
+window.require =
+  baseUrl: '/static/'
   paths:
-    jquery    : 'lib/js/jquery'
-    jqueryui  : 'lib/js/jquery-ui'
-    underscore: 'lib/js/underscore'
-    backbone  : 'lib/js/backbone'
-    marionette: 'lib/js/backbone.marionette'
-    babysitter: 'lib/js/backbone.babysitter'
-    wreqr     : 'lib/js/backbone.wreqr'
-    bootstrap : 'lib/js/bootstrap'
-
+    jquery                : '../lib/js/jquery'
+    jqueryui              : '../lib/js/jquery-ui'
+    underscore            : '../lib/js/underscore'
+    backbone              : '../lib/js/backbone'
+    marionette            : '../lib/js/backbone.marionette'
+    'backbone.wreqr'      : '../lib/js/backbone.wreqr'
+    'backbone.babysitter' : '../lib/js/backbone.babysitter'
+    bootstrap             : '../lib/js/bootstrap'
   shim:
     underscore:
       exports: '_'
@@ -20,6 +19,6 @@ require =
       exports: "Backbone"
     marionette:
       deps: ["backbone"]
-      exports: "Backbone"
+      exports: "Marionette"
     bootstrap:
       deps: ["jquery"]

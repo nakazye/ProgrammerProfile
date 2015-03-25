@@ -1,7 +1,0 @@
-require(
-  [
-    'marionette'
-  ],
-  ->
-    'user strict'
-)

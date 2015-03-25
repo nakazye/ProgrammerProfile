@@ -1,5 +1,5 @@
-class Foo
-  $ = require('jquery')
-  name: ->
-    'Foo'
-module.exports = Foo
+define ['marionette'], (Marionette) ->
+  window.app = new Marionette.Application(
+    initialize:  ->
+      console.log 'app::initialize()'
+  )
