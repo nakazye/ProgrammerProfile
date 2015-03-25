@@ -28,9 +28,11 @@ paths =
 # =============================================
 # bower
 # =============================================
-gulp.task 'bower:clean', (callback) ->
-  rimraf "#{static_root}/lib/",
-  callback
+gulp.task 'bower:clean:lib', (callback) ->
+    rimraf "#{static_root}/lib/", callback
+
+gulp.task 'bower:clean:components', (callback) ->
+    rimraf 'bower_components/', callback
 
 gulp.task 'bower:install', ->
   bower
@@ -59,9 +61,9 @@ gulp.task 'bower:font', ->
 
 gulp.task 'bower', (callback) ->
   runSequence(
-    'bower:clean'
+    ['bower:clean:lib', 'bower:clean:components']
     'bower:install'
-    ['bower:js', 'bower:css', 'bower:font'],
+    ['bower:js', 'bower:css', 'bower:font']
     callback
   )
 
@@ -86,8 +88,8 @@ gulp.task 'coffee:clean', (cb) ->
 
 gulp.task 'coffee', ['coffee:clean'], (callback) ->
   runSequence(
-    'coffee:lint',
-    'coffee:compile',
+    'coffee:lint'
+    'coffee:compile'
     callback
   )
 
@@ -108,7 +110,7 @@ gulp.task 'test:mocha', ->
 
 gulp.task 'test', ['test:compile'], (callback) ->
   runSequence(
-    'test:compile',
+    'test:compile'
     'test:mocha'
     callback
   )
@@ -119,6 +121,6 @@ gulp.task 'test', ['test:compile'], (callback) ->
 
 gulp.task 'default', ->
   runSequence(
-    ['bower', 'coffee'],
+    ['bower', 'coffee']
     'test'
   )
