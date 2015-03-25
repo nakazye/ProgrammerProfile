@@ -106,7 +106,7 @@ gulp.task 'test:compile', ->
 
 gulp.task 'test:mocha', ->
   gulp.src 'mochaPhantomJsRunner.html'
-  .pipe mochaPhantomJS({reporter: 'spec'})
+  .pipe mochaPhantomJS({reporter: 'node_modules/mocha/lib/reporters/nyan.js'})
 
 gulp.task 'test', ['test:compile'], (callback) ->
   runSequence(
