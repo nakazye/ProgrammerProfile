@@ -13,7 +13,6 @@ mochaPhantomJS = require 'gulp-mocha-phantomjs'
 exec           = require 'child_process'
                                      .exec
 shell          = require 'gulp-shell'
-wait           = require 'gulp-wait'
 
 static_root = './ProgrammerProfile/staticfiles'
 
