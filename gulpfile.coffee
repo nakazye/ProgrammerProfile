@@ -116,6 +116,13 @@ gulp.task 'test', ['test:compile'], (callback) ->
   )
 
 # =============================================
+# watch
+# =============================================
+gulp.task 'watch', ->
+  gulp.watch "#{paths.src.coffee}/**/*.coffee", ['coffee:compile', 'coffee:lint', 'test:mocha']
+  gulp.watch "#{paths.test.coffee}/**/*.coffee", ['test:compile', 'test:mocha']
+
+# =============================================
 # default
 # =============================================
 
