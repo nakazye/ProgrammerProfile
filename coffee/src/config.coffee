@@ -1,5 +1,5 @@
 window.require =
-  baseUrl: '/static/'
+  baseUrl: '/static/js/'
   paths:
     jquery                : '../lib/js/jquery'
     jqueryui              : '../lib/js/jquery-ui'

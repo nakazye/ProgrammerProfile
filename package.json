@@ -21,6 +21,7 @@
     "gulp-filter": "^2.0.2",
     "gulp-flatten": "0.0.4",
     "gulp-mocha-phantomjs": "^0.5.3",
+    "gulp-shell": "^0.4.0",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-util": "^3.0.4",
     "main-bower-files": "^2.6.2",

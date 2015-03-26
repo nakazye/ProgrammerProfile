@@ -10,6 +10,10 @@ rimraf         = require 'rimraf'
 sourcemaps     = require 'gulp-sourcemaps'
 coffeelint     = require 'gulp-coffeelint'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
+exec           = require 'child_process'
+                                     .exec
+shell          = require 'gulp-shell'
+wait           = require 'gulp-wait'
 
 static_root = './ProgrammerProfile/staticfiles'
 
@@ -24,6 +28,21 @@ paths =
       css:     "#{static_root}/lib/css"
       fonts:   "#{static_root}/lib/fonts"
     js:        "#{static_root}/js"
+
+server_proc = {}
+
+# =============================================
+# server
+# =============================================
+gulp.task 'server:start', ->
+  server_proc = exec 'source env/bin/activate;PYTHONUNBUFFERED=1 ./manage.py runserver 0.0.0.0:8080'
+  server_proc.stderr.on 'data', (data) -> process.stdout.write data
+
+gulp.task 'server:kill', ->
+  server_proc.kill()
+
+gulp.task 'server:collectstatic', ->
+  shell.task 'source env/bin/activate;PYTHONUNBUFFERED=2 manage.py collectstatic --noinput'
 
 # =============================================
 # bower
@@ -41,23 +60,23 @@ gulp.task 'bower:install', ->
 gulp.task 'bower:js', ->
   jsFilter = filter '**/*.js'
   gulp.src bowerfiles()
-  .pipe jsFilter
-  .pipe flatten()
-  .pipe gulp.dest "#{paths.dest.lib.js}"
+    .pipe jsFilter
+    .pipe flatten()
+    .pipe gulp.dest "#{paths.dest.lib.js}"
 
 gulp.task 'bower:css', ->
   cssFilter = filter '**/*.css'
   gulp.src bowerfiles()
-  .pipe cssFilter
-  .pipe flatten()
-  .pipe gulp.dest "#{paths.dest.lib.css}"
+    .pipe cssFilter
+    .pipe flatten()
+    .pipe gulp.dest "#{paths.dest.lib.css}"
 
 gulp.task 'bower:font', ->
   fontFilter = filter '**/glyphicons-halflings-regular.*'
   gulp.src bowerfiles()
-  .pipe fontFilter
-  .pipe flatten()
-  .pipe gulp.dest "#{paths.dest.lib.fonts}"
+    .pipe fontFilter
+    .pipe flatten()
+    .pipe gulp.dest "#{paths.dest.lib.fonts}"
 
 gulp.task 'bower', (callback) ->
   runSequence(
@@ -67,21 +86,20 @@ gulp.task 'bower', (callback) ->
     callback
   )
 
-
 # =============================================
 # my coffee script
 # =============================================
 gulp.task 'coffee:lint', () ->
   gulp.src "#{paths.src.coffee}/**/*.coffee"
-  .pipe coffeelint('coffeelint.json')
-  .pipe coffeelint.reporter()
+    .pipe coffeelint('coffeelint.json')
+    .pipe coffeelint.reporter()
 
 gulp.task 'coffee:compile', ->
   gulp.src "#{paths.src.coffee}/**/*.coffee"
-  .pipe sourcemaps.init()
-  .pipe coffee()
-  .pipe sourcemaps.write()
-  .pipe gulp.dest "#{paths.dest.js}"
+    .pipe sourcemaps.init()
+    .pipe coffee()
+    .pipe sourcemaps.write()
+    .pipe gulp.dest "#{paths.dest.js}"
 
 gulp.task 'coffee:clean', (cb) ->
   rimraf "#{paths.dest.js}", cb
@@ -99,16 +117,22 @@ gulp.task 'coffee', ['coffee:clean'], (callback) ->
 # =============================================
 gulp.task 'test:compile', ->
   gulp.src "#{paths.test.coffee}/**/*.coffee"
-  .pipe sourcemaps.init()
-  .pipe coffee()
-  .pipe sourcemaps.write()
-  .pipe gulp.dest "#{paths.dest.js}"
+    .pipe sourcemaps.init()
+    .pipe coffee()
+    .pipe sourcemaps.write()
+    .pipe gulp.dest "#{paths.dest.js}"
+  gulp.src "#{paths.test.coffee}/*.html"
+    .pipe gulp.dest "#{static_root}"
 
 gulp.task 'test:mocha', ->
-  gulp.src 'mochaPhantomJsRunner.html'
-  .pipe mochaPhantomJS({reporter: 'node_modules/mocha/lib/reporters/nyan.js'})
+    stream = mochaPhantomJS
+      reporter: 'node_modules/mocha/lib/reporters/nyan.js'
+    stream.write
+      path: 'http://localhost:8080/static/mochaPhantomJsRunner.html'
+    stream.end()
+    stream
 
-gulp.task 'test', ['test:compile'], (callback) ->
+gulp.task 'test', (callback) ->
   runSequence(
     'test:compile'
     'test:mocha'
@@ -118,9 +142,10 @@ gulp.task 'test', ['test:compile'], (callback) ->
 # =============================================
 # watch
 # =============================================
-gulp.task 'watch', ->
-  gulp.watch "#{paths.src.coffee}/**/*.coffee", ['coffee:compile', 'coffee:lint', 'test:mocha']
-  gulp.watch "#{paths.test.coffee}/**/*.coffee", ['test:compile', 'test:mocha']
+gulp.task 'watch:forTest', ->
+  runSequence 'server:runserver'
+  gulp.watch "#{paths.src.coffee}/**/*.*", ['coffee:compile', 'coffee:lint', 'server:collectstatic', 'test:mocha']
+  gulp.watch "#{paths.test.coffee}/**/*.*", ['test:compile', 'server:collectstatic', 'test:mocha']
 
 # =============================================
 # default
@@ -129,5 +154,15 @@ gulp.task 'watch', ->
 gulp.task 'default', ->
   runSequence(
     ['bower', 'coffee']
+  )
+
+# =============================================
+# build to test
+# =============================================
+gulp.task 'cleanBuildToTest', ->
+  runSequence(
+    'server:start'
+    ['bower', 'coffee']
+    'server:collectstatic'
     'test'
   )
