@@ -11,6 +11,7 @@ sourcemaps     = require 'gulp-sourcemaps'
 coffeelint     = require 'gulp-coffeelint'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
 exec           = require 'child_process'
+exit           = require 'gulp-exit'
                                      .exec
 shell          = require 'gulp-shell'
 
@@ -129,11 +130,12 @@ gulp.task 'test:mocha', ->
       path: 'http://localhost:8080/static/mochaPhantomJsRunner.html'
     stream.end()
     stream
+    
 
 gulp.task 'test', (callback) ->
   runSequence(
     'test:compile'
-    'test:mocha'
+#    'test:mocha'
     callback
   )
 
