@@ -35,7 +35,6 @@ server_proc = {}
 # =============================================
 gulp.task 'server:start', ->
   server_proc = exec 'source env/bin/activate;PYTHONUNBUFFERED=1 ./manage.py runserver 0.0.0.0:8080'
-  server_proc.stderr.on 'data', (data) -> process.stdout.write data
 
 gulp.task 'server:kill', ->
   server_proc.kill()
