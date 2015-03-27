@@ -11,9 +11,9 @@ sourcemaps     = require 'gulp-sourcemaps'
 coffeelint     = require 'gulp-coffeelint'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
 exec           = require 'child_process'
-exit           = require 'gulp-exit'
                                      .exec
 shell          = require 'gulp-shell'
+exit           = require 'gulp-exit'
 
 static_root = './ProgrammerProfile/staticfiles'
 
