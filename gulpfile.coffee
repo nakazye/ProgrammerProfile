@@ -163,5 +163,5 @@ gulp.task 'cleanBuildToTest', ->
     ['bower', 'coffee']
     'server:collectstatic'
     'test'
-    'server:kill'
+#    'server:kill'
   )
