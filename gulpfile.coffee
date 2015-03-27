@@ -40,7 +40,7 @@ gulp.task 'server:kill', ->
   process.kill server_proc.pid, 'SIGKILL'
 
 gulp.task 'server:collectstatic', ->
-  shell.task 'source env/bin/activate;PYTHONUNBUFFERED=2 manage.py collectstatic --noinput'
+  shell.task 'source env/bin/activate;python manage.py collectstatic --noinput'
 
 # =============================================
 # bower
