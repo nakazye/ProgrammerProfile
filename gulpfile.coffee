@@ -124,7 +124,7 @@ gulp.task 'test:compile', ->
 
 gulp.task 'test:mocha', ->
     stream = mochaPhantomJS
-      reporter: 'node_modules/mocha/lib/reporters/nyan.js'
+      reporter: 'spec'
     stream.write
       path: 'http://localhost:8080/static/mochaPhantomJsRunner.html'
     stream.end()
@@ -163,5 +163,5 @@ gulp.task 'cleanBuildToTest', ->
     ['bower', 'coffee']
     'server:collectstatic'
     'test'
-#    'server:kill'
+    'server:kill'
   )
