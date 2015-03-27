@@ -37,7 +37,7 @@ gulp.task 'server:start', ->
   server_proc = exec 'source env/bin/activate;PYTHONUNBUFFERED=1 ./manage.py runserver 0.0.0.0:8080'
 
 gulp.task 'server:kill', ->
-  server_proc.kill()
+  process.kill server_proc.pid, 'SIGKILL'
 
 gulp.task 'server:collectstatic', ->
   shell.task 'source env/bin/activate;PYTHONUNBUFFERED=2 manage.py collectstatic --noinput'
