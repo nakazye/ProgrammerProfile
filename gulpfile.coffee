@@ -100,7 +100,7 @@ gulp.task 'coffee:compile', ->
     .pipe gulp.dest "#{paths.dest.js}"
   # template files
   gulp.src "#{paths.src.coffee}/templates/**/*.html"
-    .pipe gulp.dest "#{paths.dest.js}/templates/"
+    .pipe gulp.dest "#{paths.dest.js}/templates"
 
 gulp.task 'coffee:clean', (cb) ->
   rimraf "#{paths.dest.js}", cb

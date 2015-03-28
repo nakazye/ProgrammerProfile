@@ -40,6 +40,7 @@ define [
 
     goMain: ->
       console.log 'app::goMain()'
+      @layouts.mainLayout.getRegion('contentsRegion').show(@layouts.topLayout)
       
 
     window.app
