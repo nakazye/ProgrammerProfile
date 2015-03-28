@@ -4,3 +4,4 @@ define ['marionette'], (Marionette) ->
           '': 'index'
         index: ->
           console.log 'AppRouter::index()'
+          app.goMain()

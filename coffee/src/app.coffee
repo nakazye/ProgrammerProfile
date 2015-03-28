@@ -1,10 +1,12 @@
 define [
   'marionette'
   'layouts/MainLayout'
+  'layouts/TopLayout'
   'MainRouter'
   ], (
   Marionette
   MainLayout
+  TopLayout
   MainRouter
   ) ->
   window.app = new Marionette.Application
@@ -19,12 +21,15 @@ define [
     start: ->
       console.log 'app::start()'
 
+      # prepare Layout
+      @layouts.mainLayout = new MainLayout()
+      @layouts.topLayout = new TopLayout()
+
       # set main region
       @addRegions
         mainRegion: '#main-region'
 
       # set main Layout
-      @layouts.mainLayout = new MainLayout()
       @getRegion('mainRegion').show(@layouts.mainLayout)
 
       # set Router
@@ -32,5 +37,9 @@ define [
 
       Backbone.history.start
         pushstate: true
+
+    goMain: ->
+      console.log 'app::goMain()'
+      
 
     window.app

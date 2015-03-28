@@ -63,7 +63,7 @@ gulp.task 'bower:js', ->
     .pipe gulp.dest "#{paths.dest.lib.js}"
 
 gulp.task 'bower:css', ->
-  cssFilter = filter '**/*.css'
+  cssFilter = filter '**/*.css*'
   gulp.src bowerfiles()
     .pipe cssFilter
     .pipe flatten()

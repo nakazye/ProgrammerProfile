@@ -9,4 +9,5 @@ define [
     initialize: ->
       console.log 'MainLayout::initialize()'
     template: _.template MainLayoutTmpl
-    regions: {}
+    regions:
+      contentsRegion: 'contents-region'
