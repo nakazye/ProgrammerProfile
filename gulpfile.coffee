@@ -13,7 +13,6 @@ mochaPhantomJS = require 'gulp-mocha-phantomjs'
 exec           = require 'child_process'
                                      .exec
 shell          = require 'gulp-shell'
-exit           = require 'gulp-exit'
 
 static_root = './ProgrammerProfile/staticfiles'
 
@@ -135,7 +134,7 @@ gulp.task 'test:mocha', ->
 gulp.task 'test', (callback) ->
   runSequence(
     'test:compile'
-#    'test:mocha'
+    'test:mocha'
     callback
   )
 
@@ -146,6 +145,12 @@ gulp.task 'watch:forTest', ->
   runSequence 'server:runserver'
   gulp.watch "#{paths.src.coffee}/**/*.*", ['coffee:compile', 'coffee:lint', 'server:collectstatic', 'test:mocha']
   gulp.watch "#{paths.test.coffee}/**/*.*", ['test:compile', 'server:collectstatic', 'test:mocha']
+
+# =============================================
+# exit
+# =============================================
+gulp.task 'process:exit', ->
+  process.exit()
 
 # =============================================
 # default
@@ -166,4 +171,5 @@ gulp.task 'cleanBuildToTest', ->
     'server:collectstatic'
     'test'
     'server:kill'
+    'process:exit'
   )

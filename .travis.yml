@@ -6,7 +6,6 @@ install:
 - pip install -r requirements.txt
 script:
 - gulp cleanBuildToTest
-- echo finish
 env:
   global:
     - STAGE=DEBUG
