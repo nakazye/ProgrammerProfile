@@ -12,13 +12,14 @@ define ['app'], (app) ->
         expect(app.models).to.eql({})
       it 'this.collections', ->
         expect(app.collections).to.eql({})
-      it 'this.regions', ->
-        expect(app.regions).to.eql({})
       it 'this.layouts', ->
         expect(app.layouts).to.eql({})
       it 'this.views', ->
         expect(app.views).to.eql({})
-
-    it 'スタート実施', ->
-      expect(app.start).to.exist
-      window.app.start()
+      it 'add Region', ->
+        expect(app.getRegion('mainRegion'))
+    describe '処理実施', ->
+      it 'スタート実施', ->
+        expect(app.start).to.exist
+        window.app.start()
+        

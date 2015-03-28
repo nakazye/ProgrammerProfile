@@ -14,6 +14,8 @@
         <script src="/static/lib/js/require.js"></script>
         <script src="/static/lib/js/mocha.js"></script>
         <script src="/static/lib/js/chai.js"></script>
+
+        <div id="main-region"></div>
         <script>
          require([
              'mocha',
@@ -22,7 +24,8 @@
              mocha.setup('bdd');
              expect = require('chai').expect;
              require(
-                 ['appSpec'],
+                 ['appSpec',
+                 'layouts/MainLayoutSpec'],
                  function(){
                      if (window.mochaPhantomJS) {
                          mochaPhantomJS.run();

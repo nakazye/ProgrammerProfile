@@ -1,6 +1,7 @@
 window.require =
   baseUrl: '/static/js/'
   paths:
+    text                  : '../lib/js/text'
     jquery                : '../lib/js/jquery'
     jqueryui              : '../lib/js/jquery-ui'
     underscore            : '../lib/js/underscore'

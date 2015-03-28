@@ -98,6 +98,9 @@ gulp.task 'coffee:compile', ->
     .pipe coffee()
     .pipe sourcemaps.write()
     .pipe gulp.dest "#{paths.dest.js}"
+  # template files
+  gulp.src "#{paths.src.coffee}/templates/**/*.html"
+    .pipe gulp.dest "#{paths.dest.js}/templates/"
 
 gulp.task 'coffee:clean', (cb) ->
   rimraf "#{paths.dest.js}", cb
@@ -124,7 +127,7 @@ gulp.task 'test:compile', ->
 
 gulp.task 'test:mocha', ->
     stream = mochaPhantomJS
-      reporter: 'spec'
+      reporter: 'node_modules/mocha/lib/reporters/nyan.js'
     stream.write
       path: 'http://localhost:8080/static/mochaPhantomJsRunner.html'
     stream.end()
@@ -142,7 +145,6 @@ gulp.task 'test', (callback) ->
 # watch
 # =============================================
 gulp.task 'watch:forTest', ->
-  runSequence 'server:runserver'
   gulp.watch "#{paths.src.coffee}/**/*.*", ['coffee:compile', 'coffee:lint', 'server:collectstatic', 'test:mocha']
   gulp.watch "#{paths.test.coffee}/**/*.*", ['test:compile', 'server:collectstatic', 'test:mocha']
 
