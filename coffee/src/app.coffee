@@ -1,9 +1,11 @@
 define [
   'marionette'
   'layouts/MainLayout'
+  'MainRouter'
   ], (
   Marionette
   MainLayout
+  MainRouter
   ) ->
   window.app = new Marionette.Application
     initialize: ->
@@ -12,6 +14,7 @@ define [
       @collections = {}
       @layouts = {}
       @views = {}
+      @router = {}
 
     start: ->
       console.log 'app::start()'
@@ -25,7 +28,7 @@ define [
       @getRegion('mainRegion').show(@layouts.mainLayout)
 
       # set Router
-      
+      @router = new MainRouter()
 
       Backbone.history.start
         pushstate: true

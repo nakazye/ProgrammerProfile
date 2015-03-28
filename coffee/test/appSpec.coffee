@@ -16,10 +16,14 @@ define ['app'], (app) ->
         expect(app.layouts).to.eql({})
       it 'this.views', ->
         expect(app.views).to.eql({})
+      it 'this.router', ->
+        expect(app.router).to.eql({})
       it 'add Region', ->
         expect(app.getRegion('mainRegion'))
     describe '処理実施', ->
       it 'スタート実施', ->
         expect(app.start).to.exist
         window.app.start()
+      it 'router生成', ->
+        expect(app.router).to.be.instanceof(Marionette.AppRouter)
         
