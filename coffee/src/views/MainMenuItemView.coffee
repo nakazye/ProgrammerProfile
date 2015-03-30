@@ -17,7 +17,7 @@ define [
         link: 'a'
       events:
         'click @ui.link': 'clickLink'
-      clickLink: (event)->
+      clickLink: (event) ->
         console.log 'MainMenuItemView::clickLink()'
         console.log 'navigate-> ' + @model.get('path')
         app.router.navigate @model.get('path'), {trigger: true}

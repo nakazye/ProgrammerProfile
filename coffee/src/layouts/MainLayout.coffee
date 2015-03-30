@@ -22,9 +22,8 @@ define [
       console.log 'MainLayout::onShow()'
       menuView =  new MainMenuCollectionView()
       @getRegion('mainMenuRegion').show(menuView)
-    clickBrand: (event)->
+    clickBrand: (event) ->
       console.log 'MainLayout::clickLink()'
       console.log 'navigate-> /'
       app.router.navigate '/', {trigger: true}
       event.preventDefault() # これがないと/hoge#みたいなURLになってしまう(hrefのURLが発動してしまう)
-
