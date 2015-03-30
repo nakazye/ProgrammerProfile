@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'ProgrammerProfile',
     'gunicorn',
+    'rest_framework'
 )
 
 MIDDLEWARE_CLASSES = (

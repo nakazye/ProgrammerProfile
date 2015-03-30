@@ -36,11 +36,17 @@ define [
       @router = new MainRouter()
 
       Backbone.history.start
-        pushstate: true
+        pushState: true
+        root: '/'
 
     goMain: ->
       console.log 'app::goMain()'
       @layouts.mainLayout.getRegion('contentsRegion').show(@layouts.topLayout)
-      
+
+    goUser: ->
+      console.log 'app::goUser()'
+
+    goStats: ->
+      console.log 'app::goStats()'
 
     window.app
