@@ -33,12 +33,6 @@ server_proc = {}
 # =============================================
 # server
 # =============================================
-gulp.task 'server:start', ->
-  server_proc = exec 'source env/bin/activate;PYTHONUNBUFFERED=1 ./manage.py runserver 0.0.0.0:8080'
-
-gulp.task 'server:kill', ->
-  process.kill server_proc.pid, 'SIGKILL'
-
 gulp.task 'server:collectstatic', ->
   shell.task 'source env/bin/activate;python manage.py collectstatic --noinput'
 
@@ -145,7 +139,6 @@ gulp.task 'test', (callback) ->
 # watch
 # =============================================
 gulp.task 'watch:forTest', ->
-  runSequence 'server:start'
   gulp.watch "#{paths.src.coffee}/**/*.*", ['coffee:compile', 'coffee:lint', 'server:collectstatic', 'test:mocha']
   gulp.watch "#{paths.test.coffee}/**/*.*", ['test:compile', 'server:collectstatic', 'test:mocha']
 
@@ -169,11 +162,8 @@ gulp.task 'default', ->
 # =============================================
 gulp.task 'cleanBuildToTest', ->
   runSequence(
-    'server:start'
     ['bower', 'coffee']
     'server:collectstatic'
     'test'
-    'server:kill'
     'process:exit'
   )
-
