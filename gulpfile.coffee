@@ -145,6 +145,7 @@ gulp.task 'test', (callback) ->
 # watch
 # =============================================
 gulp.task 'watch:forTest', ->
+  runSequence 'server:start'
   gulp.watch "#{paths.src.coffee}/**/*.*", ['coffee:compile', 'coffee:lint', 'server:collectstatic', 'test:mocha']
   gulp.watch "#{paths.test.coffee}/**/*.*", ['test:compile', 'server:collectstatic', 'test:mocha']
 
@@ -175,3 +176,4 @@ gulp.task 'cleanBuildToTest', ->
     'server:kill'
     'process:exit'
   )
+
