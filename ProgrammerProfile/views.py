@@ -152,7 +152,7 @@ def staruser(request, category=None):
                     'skillConfigurationCategory': SKILL_CONFIGURATION_CATEGORY,
                     'skillOthersCategory': SKILL_OTHERS_CATEGORY})
 
-    userinfos = BasicTwitterInfo.objects.filter(target__category='skill',
+    userinfos = BasicTwitterInfo.objects.filter(target__category='skill', target__data='skilled',
                                                 target__subcategory=category).annotate(num_recommend=Count('target')).order_by('-num_recommend')
     context.update({'users': userinfos})
 
