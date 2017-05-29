@@ -100,7 +100,7 @@ SKILL_PLATFORM_CATEGORY = ('Windows',
                            '組み込み')
 
 SKILL_EDITOR_CATEGORY = ('vi',
-                         'vim',
+                         'Vim',
                          'Emacs',
                          'xyzzy',
                          'Sublime Text',
